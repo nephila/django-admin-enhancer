@@ -5,19 +5,21 @@ from django.contrib import admin
 from ..admin import EnhancedModelAdminMixin
 
 try:
-   from cmsplugin_filer_image.admin import ThumbnailOption
+    def patch():
+       from cmsplugin_filer_image.admin import ThumbnailOption
 
-   class EnhancedThumbnailOptionAdmin(EnhancedModelAdminMixin,admin.ModelAdmin):
-       list_display = ('name', 'width', 'height')
+       class EnhancedThumbnailOptionAdmin(EnhancedModelAdminMixin,admin.ModelAdmin):
+           list_display = ('name', 'width', 'height')
 
-   try:
-       admin.site.unregister(ThumbnailOption)
-   except NotRegistered,e:
-       print e
-   try:
-       admin.site.register(ThumbnailOption, EnhancedThumbnailOptionAdmin)
-   except AlreadyRegistered,e:
-       print e
+       try:
+           admin.site.unregister(ThumbnailOption)
+       except NotRegistered,e:
+           print e
+       try:
+           admin.site.register(ThumbnailOption, EnhancedThumbnailOptionAdmin)
+       except AlreadyRegistered,e:
+           print e
+    patch()
 
 except ImportError:
   print "cmsplugin_filer not installed, patching skipped"

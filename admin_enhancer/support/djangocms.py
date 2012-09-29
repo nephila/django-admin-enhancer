@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
 from ..admin import EnhancedModelAdminMixin
 
-try:
-    from cms.admin.pageadmin import PageAdmin,Page
+def patch():
+    from cms.admin.pageadmin import PageAdmin, Page
 
     class EnhancedPageAdmin(EnhancedModelAdminMixin,PageAdmin):
         pass
@@ -18,6 +18,4 @@ try:
         admin.site.register(Page, EnhancedPageAdmin)
     except AlreadyRegistered, e:
         print e
-
-except ImportError:
-    print "django-cms not installed, patching skipped"
+patch()
