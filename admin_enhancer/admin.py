@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -26,6 +27,14 @@ class EnhancedAdminMixin(object):
                                                           can_delete_related)
                 formfield.widget = widget
         return formfield
+
+    def delete_view(self, request, object_id, extra_context=None):
+        """ Sets is_popup context variable to hide admin header
+        """
+        if not extra_context:
+            extra_context = {}
+        extra_context['is_popup'] = '_popup' in request.GET.keys()
+        return  super(EnhancedAdminMixin,self).delete_view(request, object_id, extra_context)
 
 class EnhancedModelAdminMixin(EnhancedAdminMixin):
     
