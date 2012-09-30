@@ -2,12 +2,12 @@
 from django.contrib.admin.sites import NotRegistered, AlreadyRegistered
 from django.utils.translation import ugettext_lazy as _
 from django.contrib import admin
-from ..admin import EnhancedModelAdminMixin
+from ...admin import EnhancedModelAdminMixin
 
-def patch():
-    from cms.admin.pageadmin import PageAdmin, Page
+try:
+    from cms.admin.pageadmin import PageAdmin,Page
 
-    class EnhancedPageAdmin(EnhancedModelAdminMixin,PageAdmin):
+    class EnhancedPageAdmin(EnhancedModelAdminMixin, PageAdmin):
         pass
 
     try:
@@ -18,4 +18,5 @@ def patch():
         admin.site.register(Page, EnhancedPageAdmin)
     except AlreadyRegistered, e:
         print e
-patch()
+except ImportError:
+    print "Error while importing django-cms, patching skipped"
