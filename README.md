@@ -24,11 +24,11 @@ For some examples take a look [here](https://github.com/charettes/django-admin-e
 
 ## Django CMS support
 
-Django CMS (https://www.django-cms.org/) defines a plugin system which enables the creation of pluggable application system; its plugin system relies on standard Django admin framework so it's easy to *enhance* plugins with this project.
+Django CMS (https://www.django-cms.org/) defines a plugin system to create pluggable applications; its plugin system relies on standard Django admin framework so it's easy to *enhance* plugins using this project.
 
 ### Plugin enhancement
 
-To add `admin_enhancer` support to your own plugins just add `admin_enhancer.EnhancedAdminMixin` to your plugin class definition::
+To add `admin_enhancer` support to your own plugins just add `admin_enhancer.EnhancedAdminMixin` to plugin class definition::
 
     ...
     from admin_enhancer.admin import EnhancedAdminMixin
@@ -39,7 +39,7 @@ To add `admin_enhancer` support to your own plugins just add `admin_enhancer.Enh
         ...
     plugin_pool.register_plugin(NphFilePlugin)
 
-To *enhance* thir party plugins you can unregister third-party plugin and extend it with your own base class::
+To *enhance* third party plugins, unregister original plugin and extend it with your own base class::
 
     ...
     from other.app.cms_plugins import ThirdPartyPlugin
@@ -55,7 +55,7 @@ To *enhance* thir party plugins you can unregister third-party plugin and extend
 
 ### Page admin support
 
-Django CMS defines a ModelAdmin for its `Page` object, to support clean `Page` `admin_enhancer.support.djangocms` defines a new `ModelAdmin` for it. To install it add `admin_enhancer.support.djangocms` to `INSTALLED_APPS`, *after* any `django-cms` or `django-admin-enhancer`-related application.
+Django CMS defines a ModelAdmin for its `Page` object; `admin_enhancer.support.djangocms` defines a new `ModelAdmin` for `Page` to enhance it. To install it add `admin_enhancer.support.djangocms` to `INSTALLED_APPS`, *after* any `django-cms` or `django-admin-enhancer`-related application.
 
 
 ## Django Filer support

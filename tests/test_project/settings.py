@@ -131,4 +131,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'admin_enhancer',
     'test_app',
+    'admin_enhancer.support.filer',
+    'admin_enhancer.support.djangocms',
 )
